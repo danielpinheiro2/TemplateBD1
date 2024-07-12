@@ -1,12 +1,13 @@
-# TRABALHO 01:  Título do Trabalho
+# TRABALHO 01:  Gerenciamento de restaurante
 Trabalho desenvolvido durante a disciplina de BD1
 
 # Sumário
 
 ### 1. COMPONENTES<br>
 Integrantes do grupo<br>
-primeiro_componente_do_grupo:email_primeiro_componente@dominio.com<br>
-segundo_componente_do_grupo:email_segundo_componente@dominio.com<br>
+Daniel Henrique Alarcon: d.hapinheiro@gmail.com<br>
+Henrique Bravim: <br>
+João Victor Rangel: joao.victor00726@gmail.com<br>
 ...<br>
 
 
