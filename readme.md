@@ -27,11 +27,17 @@ O sistema deve ter: Clientes, Pedidos, Menu, Inventário os clientes podem ser a
     b) Crie uma lista com os 5 principais relatórios que poderão ser obtidos por meio do sistema proposto!
     
 > Nosso sistema do restaurante precisa inicialmente dos seguintes relatórios:
-* Relatorio informando a quantidade de cliente atendido de um periodo.
-* Relatorio que calcule todas as vendas de um periodo e informe um valor bruto.
-* Relatorio de itens fora de estoque.
-* Relatorio de vendas por categoria informando quais itens do cardápio foram mais vendidos de um periodo.
-* Relatorio de custo e margem de lucro calculando os custos dos ingredientes em relação ao relatorio de de vendas para determinar a margem de lucro.
+
+Relatório 1: Exibir todos os ingredientes que estão vencidos ou estão prestes a vencer e a quantidade deles.
+
+Relatório 2: Exibir o valor total de vendas por cada produto ao longo do tempo.
+
+Relatório 3: Exibir a média de gasto dos clientes.
+
+Relatório 4: Exibir os itens mais vendidos nos últimos 3 meses.
+
+Relatório 5: Exibir a distribuição de vendas por hora do dia, para identificar os horários de pico.
+
 
     
 ### 5.MODELO CONCEITUAL<br>
