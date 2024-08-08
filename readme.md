@@ -16,12 +16,6 @@ Este trabalho foi desenvolvido na disciplina de banco de dados do semestre 2024/
 
 ### 2.MINI-MUNDO<br>
 
-***Descrever o mini-mundo! (Não deve ser maior do que 30 linhas, se necessário resumir para justar) <br>
-Entrevista com o usuário e identificação dos requisitos.(quando for o caso de sistemas com cliente  real)<br>
-Descrição textual das regras de negócio definidas como um  subconjunto do mundo real 
-cujos elementos são propriedades que desejamos incluir, processar, armazenar, 
-gerenciar, atualizar, e que descrevem a proposta/solução a ser desenvolvida.
-
 > O sofisticado restaurante "Le Gourmet", conhecido por sua sofisticação e excelência, enfrenta desafios na gestão devido sua clientela exigente. Para manter o alto padrão e eficiência, Sr.Manoel decidiu implementar um sistema integrado que garantisse a precisão no gerenciamento do seu negócio.
 O sistema deve ter: Clientes, Pedidos, Menu, Inventário os clientes podem ser atendidos no restaurante ou fazer o pedido para entrega, cada cliente deve ter o nome, telefone para contato e local onde mora caso peça para entrega, os pedidos devem ser compostos por um ou mais itens do menu, podem ser para consumo local, viagem ou para entrega, cada pedido deve ter um status entre "em preparo, pronto, entregue ou cancelado", também deve registrar a data e hora do pedido. o Menu é deve ser composto por diversos itens, cada item possui nome, descrição, preço e categoria, o menu pode ser atualizado conforme necessário pelo gerente do estabelecimento. o inventário deve controlar os insumos e ingredientes necessários para a preparação dos itens do menu, cada item deve possuir um nome, quantidade disponível e data de validade, o inventário deve ser atualizado conforme os insumos são utilizados e repostos.
 
@@ -41,14 +35,7 @@ O sistema deve ter: Clientes, Pedidos, Menu, Inventário os clientes podem ser a
 
     
 ### 5.MODELO CONCEITUAL<br>
-    ***A) Utilizar a Notação adequada (Preferencialmente utilizar o BR Modelo 3)
-    B) O mínimo de entidades do modelo conceitual pare este trabalho será igual a 3 e o Máximo 5.
-        * informe quais são as 3 principais entidades do sistema em densenvolvimento<br>(se houverem mais de 3 entidades, pense na importância da entidade para o sistema)       
-    C) Principais fluxos de informação/entidades do sistema (mínimo 3). <br>Dica: normalmente estes fluxos estão associados as tabelas que conterão maior quantidade de dados 
-    D) Qualidade e Clareza
-        Garantir que a semântica dos atributos seja clara no esquema (nomes coerentes com os dados).
-        Criar o esquema de forma a garantir a redução de informação redundante, possibilidade de valores null, 
-        e tuplas falsas (Aplicar os conceitos de normalização abordados).   
+
         
 ![image](https://github.com/user-attachments/assets/dd0e944e-051b-4fbc-acea-5e73b27cacaf)
 
@@ -62,7 +49,7 @@ O sistema deve ter: Clientes, Pedidos, Menu, Inventário os clientes podem ser a
 	NOME: Campo que armazena o nome do item no cardápio.
 	DESCRICAO: Campo que armazena a descrição detalhada do item no cardápio.
 	PRECO: Campo que armazena o preço do item no cardápio.
-	***CATEGORIA: Campo que armazena a categoria que o item pertence (exemplo: entrada, prato principal, sobremesa).
+
 	
 	ITEM: Tabela que armazena informações relativas aos itens.
 	ID_ITEM: Campo que armazena a chave primária de um item na tabela de itens.
@@ -98,59 +85,12 @@ O sistema deve ter: Clientes, Pedidos, Menu, Inventário os clientes podem ser a
 
 
 ### 7	MODELO FÍSICO<br>
-        a) inclusão das instruções de criacão das estruturas em SQL/DDL 
-        (criação de tabelas, alterações, etc..) 
-
-	CREATE TABLE IF NOT EXISTS Cliente (
-	    id_cliente SERIAL PRIMARY KEY,
-	    nome VARCHAR(255) NOT NULL,
-	    telefone VARCHAR(20),
-	    endereco VARCHAR(255)
-	);
+        DROP TABLE IF EXISTS Comanda;
+	DROP TABLE IF EXISTS Pedido;
+	DROP TABLE IF EXISTS Cliente;
+	DROP TABLE IF EXISTS Inventario;
+	DROP TABLE IF EXISTS Menu;
 	
-	CREATE TABLE IF NOT EXISTS Inventario (
-	    id_inventario SERIAL PRIMARY KEY,
-	    nome VARCHAR(255) NOT NULL,
-	    quantidade_disponivel INT NOT NULL,
-	    data_validade DATE
-	    
-	CREATE TABLE IF NOT EXISTS Menu (
-	    id_menu SERIAL PRIMARY KEY,
-	    nome VARCHAR(255) NOT NULL,
-	    descricao VARCHAR(255),
-	    preco FLOAT NOT NULL
-	);
-	
-	CREATE TABLE IF NOT EXISTS Item (
-	    id_item SERIAL PRIMARY KEY,
-	    fk_id_menu INT NOT NULL,
-	    quantidade INT NOT NULL,
-	    FOREIGN KEY (fk_id_menu) REFERENCES Menu(id_menu)
-	);
-	
-	CREATE TABLE IF NOT EXISTS Pedido (
-	    id_pedido SERIAL PRIMARY KEY,
-	    fk_id_cliente INT NOT NULL,
-	    fk_id_item INT NOT NULL,
-	    data_hora TIMESTAMP NOT NULL,
-	    status VARCHAR(50) NOT NULL,
-	    tipo VARCHAR(50) NOT NULL,
-	    FOREIGN KEY (fk_id_cliente) REFERENCES Cliente(id_cliente),
-	    FOREIGN KEY (fk_id_item) REFERENCES Item(id_item)
-	);
-      
-### 8	INSERT APLICADO NAS TABELAS DO BANCO DE DADOS<br>
-        ***a) Script das instruções relativas a inclusão de dados 
-	Requisito mínimo: (Script dev conter: Drop para exclusão de tabelas + create definição de para tabelas e estruturas de dados + insert para dados a serem inseridos)
-        OBS
-	1) Criar um novo banco de dados para testar a restauracao (em caso de falha na restauração o grupo não pontuará neste quesito)
-        2) script deve ser incluso no template em um arquivo no formato .SQL
-
-	-- Criação do banco de dados
-	DROP DATABASE IF EXISTS RestauranteDB;
-	CREATE DATABASE RestauranteDB;
-	
-	-- Criando as tabelas:
 	CREATE TABLE Cliente (
 	    id_cliente SERIAL PRIMARY KEY,
 	    nome VARCHAR(100) NOT NULL,
@@ -172,25 +112,27 @@ O sistema deve ter: Clientes, Pedidos, Menu, Inventário os clientes podem ser a
 	    preco DECIMAL(10, 2) NOT NULL
 	);
 	
-	CREATE TABLE Item (
-	    id_item SERIAL PRIMARY KEY,
-	    fk_id_menu INTEGER,
-	    quantidade INTEGER NOT NULL,
-	    FOREIGN KEY (fk_id_Menu) REFERENCES Menu(ID_Menu)
-	);
-	
 	CREATE TABLE Pedido (
 	    id_pedido SERIAL PRIMARY KEY,
 	    fk_id_cliente INTEGER,
-	    fk_id_item INTEGER,
 	    data_hora TEXT NOT NULL,
 	    status VARCHAR NOT NULL,
 	    tipo VARCHAR NOT NULL,
-	    FOREIGN KEY (fk_id_Item) REFERENCES Item(id_item),
-	    FOREIGN KEY (fk_id_Cliente) REFERENCES Cliente(id_cliente)
+	    FOREIGN KEY (fk_id_cliente) REFERENCES Cliente(id_cliente) ON DELETE CASCADE
 	);
 	
-	-- Inserindo dados nas tabelas:
+	CREATE TABLE Comanda (
+	    id_comanda SERIAL PRIMARY KEY,
+	    fk_id_pedido INTEGER,
+	    fk_id_menu INTEGER,
+	    quantidade INTEGER NOT NULL,
+	    FOREIGN KEY (fk_id_pedido) REFERENCES Pedido(id_pedido) ON DELETE CASCADE,
+	    FOREIGN KEY (fk_id_menu) REFERENCES Menu(id_menu) ON DELETE CASCADE
+	);
+      
+### 8	INSERT APLICADO NAS TABELAS DO BANCO DE DADOS<br>
+	
+	
 	INSERT INTO Cliente (nome, telefone, endereco) VALUES ('Ana Silva', '1234567890', 'Rua das Flores, 123');
 	INSERT INTO Cliente (nome, telefone, endereco) VALUES ('Carlos Oliveira', '2345678901', 'Avenida Paulista, 456');
 	INSERT INTO Cliente (nome, telefone, endereco) VALUES ('Maria Santos', '3456789012', 'Rua do Comércio, 789');
@@ -234,6 +176,15 @@ O sistema deve ter: Clientes, Pedidos, Menu, Inventário os clientes podem ser a
 	INSERT INTO Cliente (nome, telefone, endereco) VALUES ('Juliana Fernandes', '1234567894', 'Rua das Orquídeas, 3838');
 	INSERT INTO Cliente (nome, telefone, endereco) VALUES ('Bruno Costa', '2345678905', 'Rua das Figueiras, 3939');
 	INSERT INTO Cliente (nome, telefone, endereco) VALUES ('Ana Clara Lima', '3456789016', 'Rua das Violetas, 4040');
+	INSERT INTO cliente (nome, telefone, endereco) VALUES ('Mariana Santos', '2345678910', 'Rua dos Girassóis, 4141');
+	INSERT INTO cliente (nome, telefone, endereco) VALUES ('Felipe Almeida', '3456789021', 'Avenida Paulista, 4242');
+	INSERT INTO cliente (nome, telefone, endereco) VALUES ('Gabriela Costa', '4567890132', 'Rua das Palmeiras, 4343');
+	INSERT INTO cliente (nome, telefone, endereco) VALUES ('Mateus Lima', '5678901243', 'Rua das Rosas, 4444');
+	INSERT INTO cliente (nome, telefone, endereco) VALUES ('Isabela Silva', '6789012354', 'Rua das Azaléias, 4545');
+	INSERT INTO cliente (nome, telefone, endereco) VALUES ('Vinícius Pereira', '7890123465', 'Rua dos Cravos, 4646');
+	INSERT INTO cliente (nome, telefone, endereco) VALUES ('Caroline Oliveira', '8901234576', 'Rua dos Ipês, 4747');
+	
+	
 	
 	
 	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Farinha', 100, '2024-12-31');
@@ -281,6 +232,32 @@ O sistema deve ter: Clientes, Pedidos, Menu, Inventário os clientes podem ser a
 	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Chá', 95, '2025-11-30');
 	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Peito de Frango', 50, '2025-08-03');
 	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Carne Moída', 50, '2025-08-03');
+	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Leite Condensado', 100, '2025-01-01');
+	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Creme de Leite', 120, '2024-12-31');
+	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Chocolate em Pó', 200, '2025-02-15');
+	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Fermento em Pó', 150, '2025-03-20');
+	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Coco Ralado', 180, '2025-04-10');
+	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Amido de Milho', 220, '2025-05-05');
+	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Molho de Tomate', 250, '2025-06-25');
+	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Ervilha', 180, '2024-11-15');
+	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Milho', 200, '2024-10-30');
+	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Azeitona', 160, '2025-01-20');
+	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Palmito', 140, '2025-02-05');
+	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Sardinha', 110, '2025-03-10');
+	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Atum', 100, '2025-04-15');
+	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Camarão', 90, '2025-05-20');
+	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Lula', 80, '2025-06-25');
+	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Bacalhau', 70, '2025-07-30');
+	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Pão de Forma', 150, '2024-08-20');
+	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Pão Francês', 180, '2024-08-25');
+	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Requeijão', 140, '2024-12-05');
+	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Iogurte', 130, '2024-09-10');
+	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Café', 200, '2025-02-01');
+	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Suco de Laranja', 160, '2025-03-05');
+	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Suco de Uva', 140, '2025-04-20');
+	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Refrigerante', 300, '2025-06-15');
+	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Água Mineral', 500, '2025-07-01');
+	
 	
 	
 	INSERT INTO Menu (nome, descricao, preco) VALUES ('Pizza Margherita', 'Pizza com molho de tomate e queijo mozzarella', 29.90);
@@ -334,128 +311,254 @@ O sistema deve ter: Clientes, Pedidos, Menu, Inventário os clientes podem ser a
 	INSERT INTO Menu (nome, descricao, preco) VALUES ('Empada de Frango', 'Empada recheada com frango', 15.90);
 	INSERT INTO Menu (nome, descricao, preco) VALUES ('Risoto de Camarão', 'Risoto com Camarão', 35.90);
 	
-	
-	INSERT INTO Item (fk_id_menu, quantidade) VALUES (1, 100);
-	INSERT INTO Item (fk_id_menu, quantidade) VALUES (2, 80);
-	INSERT INTO Item (fk_id_menu, quantidade) VALUES (3, 150);
-	INSERT INTO Item (fk_id_menu, quantidade) VALUES (4, 60);
-	INSERT INTO Item (fk_id_menu, quantidade) VALUES (5, 70);
-	INSERT INTO Item (fk_id_menu, quantidade) VALUES (6, 90);
-	INSERT INTO Item (fk_id_menu, quantidade) VALUES (7, 50);
-	INSERT INTO Item (fk_id_menu, quantidade) VALUES (8, 110);
-	INSERT INTO Item (fk_id_menu, quantidade) VALUES (9, 130);
-	INSERT INTO Item (fk_id_menu, quantidade) VALUES (10, 120);
-	INSERT INTO Item (fk_id_menu, quantidade) VALUES (11, 90);
-	INSERT INTO Item (fk_id_menu, quantidade) VALUES (12, 70);
-	INSERT INTO Item (fk_id_menu, quantidade) VALUES (13, 60);
-	INSERT INTO Item (fk_id_menu, quantidade) VALUES (14, 40);
-	INSERT INTO Item (fk_id_menu, quantidade) VALUES (15, 100);
-	INSERT INTO Item (fk_id_menu, quantidade) VALUES (16, 80);
-	INSERT INTO Item (fk_id_menu, quantidade) VALUES (17, 90);
-	INSERT INTO Item (fk_id_menu, quantidade) VALUES (18, 70);
-	INSERT INTO Item (fk_id_menu, quantidade) VALUES (19, 50);
-	INSERT INTO Item (fk_id_menu, quantidade) VALUES (20, 30);
-	INSERT INTO Item (fk_id_menu, quantidade) VALUES (21, 40);
-	INSERT INTO Item (fk_id_menu, quantidade) VALUES (22, 50);
-	INSERT INTO Item (fk_id_menu, quantidade) VALUES (23, 60);
-	INSERT INTO Item (fk_id_menu, quantidade) VALUES (24, 70);
-	INSERT INTO Item (fk_id_menu, quantidade) VALUES (25, 80);
-	INSERT INTO Item (fk_id_menu, quantidade) VALUES (26, 90);
-	INSERT INTO Item (fk_id_menu, quantidade) VALUES (27, 100);
-	INSERT INTO Item (fk_id_menu, quantidade) VALUES (28, 110);
-	INSERT INTO Item (fk_id_menu, quantidade) VALUES (29, 120);
-	INSERT INTO Item (fk_id_menu, quantidade) VALUES (30, 130);
-	INSERT INTO Item (fk_id_menu, quantidade) VALUES (31, 140);
-	INSERT INTO Item (fk_id_menu, quantidade) VALUES (32, 150);
-	INSERT INTO Item (fk_id_menu, quantidade) VALUES (33, 160);
-	INSERT INTO Item (fk_id_menu, quantidade) VALUES (34, 170);
-	INSERT INTO Item (fk_id_menu, quantidade) VALUES (35, 180);
-	INSERT INTO Item (fk_id_menu, quantidade) VALUES (36, 190);
-	INSERT INTO Item (fk_id_menu, quantidade) VALUES (37, 200);
-	INSERT INTO Item (fk_id_menu, quantidade) VALUES (38, 210);
-	INSERT INTO Item (fk_id_menu, quantidade) VALUES (39, 220);
-	INSERT INTO Item (fk_id_menu, quantidade) VALUES (40, 230);
-	INSERT INTO Item (fk_id_menu, quantidade) VALUES (41, 240);
-	INSERT INTO Item (fk_id_menu, quantidade) VALUES (42, 250);
-	INSERT INTO Item (fk_id_menu, quantidade) VALUES (43, 260);
-	INSERT INTO Item (fk_id_menu, quantidade) VALUES (44, 270);
-	INSERT INTO Item (fk_id_menu, quantidade) VALUES (45, 280);
-	INSERT INTO Item (fk_id_menu, quantidade) VALUES (46, 290);
-	INSERT INTO Item (fk_id_menu, quantidade) VALUES (47, 300);
-	INSERT INTO Item (fk_id_menu, quantidade) VALUES (48, 310);
-	INSERT INTO Item (fk_id_menu, quantidade) VALUES (49, 320);
-	INSERT INTO Item (fk_id_menu, quantidade) VALUES (50, 330);
-	
-	
-	INSERT INTO Pedido (fk_id_cliente, fk_id_item, data_hora, status, tipo) VALUES (1, 1, '2024-08-01 12:00:00', 'Entregue', 'Dine-in');
-	INSERT INTO Pedido (fk_id_cliente, fk_id_item, data_hora, status, tipo) VALUES (2, 2, '2024-08-01 12:30:00', 'Preparando', 'Takeaway');
-	INSERT INTO Pedido (fk_id_cliente, fk_id_item, data_hora, status, tipo) VALUES (3, 3, '2024-08-01 13:00:00', 'Cancelado', 'Delivery');
-	INSERT INTO Pedido (fk_id_cliente, fk_id_item, data_hora, status, tipo) VALUES (4, 4, '2024-08-01 13:30:00', 'Entregue', 'Dine-in');
-	INSERT INTO Pedido (fk_id_cliente, fk_id_item, data_hora, status, tipo) VALUES (5, 5, '2024-08-01 14:00:00', 'Preparando', 'Takeaway');
-	INSERT INTO Pedido (fk_id_cliente, fk_id_item, data_hora, status, tipo) VALUES (6, 6, '2024-08-01 14:30:00', 'Entregue', 'Delivery');
-	INSERT INTO Pedido (fk_id_cliente, fk_id_item, data_hora, status, tipo) VALUES (7, 7, '2024-08-01 15:00:00', 'Cancelado', 'Dine-in');
-	INSERT INTO Pedido (fk_id_cliente, fk_id_item, data_hora, status, tipo) VALUES (8, 8, '2024-08-01 15:30:00', 'Preparando', 'Takeaway');
-	INSERT INTO Pedido (fk_id_cliente, fk_id_item, data_hora, status, tipo) VALUES (9, 9, '2024-08-01 16:00:00', 'Entregue', 'Delivery');
-	INSERT INTO Pedido (fk_id_cliente, fk_id_item, data_hora, status, tipo) VALUES (10, 10, '2024-08-01 16:30:00', 'Cancelado', 'Dine-in');
-	INSERT INTO Pedido (fk_id_cliente, fk_id_item, data_hora, status, tipo) VALUES (11, 11, '2024-08-01 17:00:00', 'Preparando', 'Takeaway');
-	INSERT INTO Pedido (fk_id_cliente, fk_id_item, data_hora, status, tipo) VALUES (12, 12, '2024-08-01 17:30:00', 'Entregue', 'Delivery');
-	INSERT INTO Pedido (fk_id_cliente, fk_id_item, data_hora, status, tipo) VALUES (13, 13, '2024-08-01 18:00:00', 'Cancelado', 'Dine-in');
-	INSERT INTO Pedido (fk_id_cliente, fk_id_item, data_hora, status, tipo) VALUES (14, 14, '2024-08-01 18:30:00', 'Preparando', 'Takeaway');
-	INSERT INTO Pedido (fk_id_cliente, fk_id_item, data_hora, status, tipo) VALUES (15, 15, '2024-08-01 19:00:00', 'Entregue', 'Delivery');
-	INSERT INTO Pedido (fk_id_cliente, fk_id_item, data_hora, status, tipo) VALUES (16, 16, '2024-08-01 19:30:00', 'Cancelado', 'Dine-in');
-	INSERT INTO Pedido (fk_id_cliente, fk_id_item, data_hora, status, tipo) VALUES (17, 17, '2024-08-01 20:00:00', 'Preparando', 'Takeaway');
-	INSERT INTO Pedido (fk_id_cliente, fk_id_item, data_hora, status, tipo) VALUES (18, 18, '2024-08-01 20:30:00', 'Entregue', 'Delivery');
-	INSERT INTO Pedido (fk_id_cliente, fk_id_item, data_hora, status, tipo) VALUES (19, 19, '2024-08-01 21:00:00', 'Cancelado', 'Dine-in');
-	INSERT INTO Pedido (fk_id_cliente, fk_id_item, data_hora, status, tipo) VALUES (20, 20, '2024-08-01 21:30:00', 'Preparando', 'Takeaway');
-	INSERT INTO Pedido (fk_id_cliente, fk_id_item, data_hora, status, tipo) VALUES (21, 21, '2024-08-01 22:00:00', 'Entregue', 'Delivery');
-	INSERT INTO Pedido (fk_id_cliente, fk_id_item, data_hora, status, tipo) VALUES (22, 22, '2024-08-01 22:30:00', 'Cancelado', 'Dine-in');
-	INSERT INTO Pedido (fk_id_cliente, fk_id_item, data_hora, status, tipo) VALUES (23, 23, '2024-08-01 23:00:00', 'Preparando', 'Takeaway');
-	INSERT INTO Pedido (fk_id_cliente, fk_id_item, data_hora, status, tipo) VALUES (24, 24, '2024-08-01 23:30:00', 'Entregue', 'Delivery');
-	INSERT INTO Pedido (fk_id_cliente, fk_id_item, data_hora, status, tipo) VALUES (25, 25, '2024-08-02 00:00:00', 'Cancelado', 'Dine-in');
+	INSERT INTO Pedido (fk_id_cliente, data_hora, status, tipo) VALUES
+	(1, '2024-08-06 19:30', 'Em preparo', 'Entrega'),
+	(1, '2024-07-15 12:00', 'Entregue', 'Entrega'),
+	(1, '2024-06-25 18:00', 'Retirado', 'Retirada'),
+	(1, '2024-05-30 14:00', 'Cancelado', 'Retirada');
+	INSERT INTO Pedido (fk_id_cliente, data_hora, status, tipo) VALUES
+	(2, '2024-08-07 20:00', 'Em preparo', 'Entrega'),
+	(2, '2024-07-10 13:00', 'Retirado', 'Retirada'),
+	(2, '2024-06-20 17:00', 'Entregue', 'Entrega'),
+	(2, '2024-05-05 15:00', 'Cancelado', 'Entrega');
+	INSERT INTO Pedido (fk_id_cliente, data_hora, status, tipo) VALUES
+	(3, '2024-08-01 12:30', 'Em preparo', 'Entrega'),
+	(3, '2024-07-25 19:00', 'Retirado', 'Retirada'),
+	(3, '2024-06-15 14:00', 'Entregue', 'Entrega'),
+	(3, '2024-05-10 16:00', 'Cancelado', 'Retirada');
+	INSERT INTO Pedido (fk_id_cliente, data_hora, status, tipo) VALUES
+	(4, '2024-08-05 13:00', 'Em preparo', 'Entrega'),
+	(4, '2024-07-18 12:00', 'Entregue', 'Entrega'),
+	(4, '2024-06-05 11:00', 'Retirado', 'Retirada'),
+	(4, '2024-05-25 14:00', 'Cancelado', 'Retirada');
+	INSERT INTO Pedido (fk_id_cliente, data_hora, status, tipo) VALUES
+	(5, '2024-08-07 18:00', 'Em preparo', 'Entrega'),
+	(5, '2024-07-05 20:00', 'Retirado', 'Retirada'),
+	(5, '2024-06-12 15:00', 'Entregue', 'Entrega'),
+	(5, '2024-05-20 19:00', 'Cancelado', 'Entrega');
+	INSERT INTO Pedido (fk_id_cliente, data_hora, status, tipo) VALUES
+	(6, '2024-08-06 17:00', 'Em preparo', 'Entrega'),
+	(6, '2024-07-15 20:00', 'Retirado', 'Retirada'),
+	(6, '2024-06-25 16:00', 'Entregue', 'Entrega'),
+	(6, '2024-05-10 14:00', 'Cancelado', 'Retirada');
+	INSERT INTO Pedido (fk_id_cliente, data_hora, status, tipo) VALUES
+	(7, '2024-08-01 19:00', 'Em preparo', 'Entrega'),
+	(7, '2024-07-20 13:00', 'Entregue', 'Entrega'),
+	(7, '2024-06-10 12:00', 'Retirado', 'Retirada'),
+	(7, '2024-05-05 17:00', 'Cancelado', 'Retirada');
+	INSERT INTO Pedido (fk_id_cliente, data_hora, status, tipo) VALUES
+	(8, '2024-08-07 21:00', 'Em preparo', 'Entrega'),
+	(8, '2024-07-25 12:00', 'Retirado', 'Retirada'),
+	(8, '2024-06-30 18:00', 'Entregue', 'Entrega'),
+	(8, '2024-05-15 20:00', 'Cancelado', 'Entrega');
+	INSERT INTO Pedido (fk_id_cliente, data_hora, status, tipo) VALUES
+	(9, '2024-08-02 14:00', 'Em preparo', 'Entrega'),
+	(9, '2024-07-05 15:00', 'Entregue', 'Entrega'),
+	(9, '2024-06-20 11:00', 'Retirado', 'Retirada'),
+	(9, '2024-05-25 13:00', 'Cancelado', 'Retirada');
+	INSERT INTO Pedido (fk_id_cliente, data_hora, status, tipo) VALUES
+	(10, '2024-08-07 16:00', 'Em preparo', 'Entrega'),
+	(10, '2024-07-12 19:00', 'Retirado', 'Retirada'),
+	(10, '2024-06-22 17:00', 'Entregue', 'Entrega'),
+	(10, '2024-05-30 20:00', 'Cancelado', 'Entrega');
+	INSERT INTO Pedido (fk_id_cliente, data_hora, status, tipo) VALUES
+	(11, '2024-05-07 12:00', 'Retirado', 'Retirada'),
+	(12, '2024-05-07 19:00', 'Entregue', 'Entrega'),
+	(13, '2024-05-08 15:00', 'Entregue', 'Entrega'),
+	(14, '2024-05-07 13:00', 'Retirado', 'Retirada'),
+	(15, '2024-04-30 18:00', 'Cancelado', 'Entrega'),
+	(16, '2024-04-25 12:00', 'Entregue', 'Entrega'),
+	(17, '2024-04-26 20:00', 'Cancelado', 'Retirada'),
+	(18, '2024-04-25 16:00', 'Retirado', 'Retirada'),
+	(19, '2024-04-22 13:00', 'Entregue', 'Entrega'),
+	(20, '2024-03-25 17:00', 'Retirado', 'Retirada'),
+	(21, '2024-03-30 19:00', 'Cancelado', 'Entrega'),
+	(22, '2024-03-15 12:00', 'Entregue', 'Entrega'),
+	(23, '2024-03-20 20:00', 'Retirado', 'Retirada'),
+	(24, '2024-03-10 14:00', 'Entregue', 'Entrega'),
+	(25, '2024-03-05 13:00', 'Cancelado', 'Retirada'),
+	(27, '2024-02-25 17:00', 'Retirado', 'Retirada'),
+	(28, '2024-02-20 19:00', 'Cancelado', 'Entrega'),
+	(29, '2024-02-15 12:00', 'Entregue', 'Entrega'),
+	(30, '2024-02-10 20:00', 'Retirado', 'Retirada'),
+	(31, '2024-08-07 11:00', 'Retirado', 'Retirada'),
+	(32, '2024-08-07 18:00', 'Entregue', 'Entrega'),
+	(33, '2024-08-08 14:00', 'Entregue', 'Entrega'),
+	(34, '2024-08-07 12:00', 'Retirado', 'Retirada'),
+	(35, '2024-07-30 17:00', 'Cancelado', 'Entrega'),
+	(36, '2024-07-25 11:00', 'Entregue', 'Entrega'),
+	(37, '2024-07-26 19:00', 'Cancelado', 'Retirada'),
+	(38, '2024-07-25 15:00', 'Retirado', 'Retirada'),
+	(39, '2024-07-22 12:00', 'Entregue', 'Entrega'),
+	(40, '2024-06-25 16:00', 'Retirado', 'Retirada'),
+	(41, '2024-06-30 18:00', 'Cancelado', 'Entrega'),
+	(42, '2024-06-15 11:00', 'Entregue', 'Entrega'),
+	(43, '2024-06-20 19:00', 'Retirado', 'Retirada'),
+	(44, '2024-06-10 13:00', 'Entregue', 'Entrega'),
+	(45, '2024-06-05 12:00', 'Cancelado', 'Retirada'),
+	(46, '2024-05-30 11:00', 'Entregue', 'Entrega'),
+	(47, '2024-05-25 16:00', 'Retirado', 'Retirada'),
+	(48, '2024-05-20 18:00', 'Cancelado', 'Entrega'),
+	(49, '2024-05-15 11:00', 'Entregue', 'Entrega'),
+	(50, '2024-05-10 19:00', 'Retirado', 'Retirada');
+	INSERT INTO Comanda (fk_id_pedido, fk_id_menu, quantidade) VALUES
+	(1, 1, 2),
+	(1, 2, 1),
+	(2, 3, 1),
+	(2, 4, 2),
+	(3, 2, 1),
+	(3, 5, 1),
+	(4, 1, 1),
+	(4, 3, 1),
+	(5, 2, 2),
+	(5, 5, 1),
+	(6, 1, 1),
+	(6, 4, 2),
+	(7, 3, 2),
+	(7, 5, 2),
+	(8, 1, 2),
+	(8, 3, 1),
+	(9, 2, 1),
+	(9, 5, 1),
+	(10, 4, 1),
+	(10, 5, 2),
+	(11, 3, 2),
+	(11, 4, 1),
+	(12, 1, 1),
+	(12, 2, 2),
+	(13, 2, 1),
+	(13, 3, 1),
+	(14, 4, 1),
+	(14, 5, 1),
+	(15, 1, 1),
+	(15, 2, 1),
+	(16, 3, 2),
+	(16, 4, 1),
+	(17, 1, 2),
+	(17, 4, 1),
+	(18, 2, 1),
+	(18, 3, 2),
+	(19, 5, 1),
+	(19, 4, 2),
+	(20, 2, 2),
+	(20, 3, 1),
+	(21, 1, 1),
+	(21, 5, 1),
+	(22, 2, 2),
+	(22, 4, 1),
+	(23, 3, 1),
+	(23, 5, 1),
+	(24, 4, 2),
+	(24, 1, 1),
+	(25, 1, 2),
+	(25, 2, 1),
+	(26, 3, 2),
+	(26, 4, 1),
+	(27, 2, 1),
+	(27, 5, 2),
+	(28, 1, 1),
+	(28, 4, 2),
+	(29, 1, 2),
+	(29, 5, 1),
+	(30, 2, 1),
+	(30, 3, 1),
+	(31, 4, 1),
+	(31, 5, 2),
+	(32, 2, 1),
+	(32, 3, 2),
+	(33, 3, 1),
+	(33, 4, 1),
+	(34, 1, 1),
+	(34, 2, 2),
+	(35, 4, 2),
+	(35, 5, 1),
+	(36, 1, 1),
+	(36, 5, 2),
+	(37, 2, 1),
+	(37, 3, 1),
+	(38, 4, 1),
+	(38, 5, 2),
+	(39, 1, 2),
+	(39, 3, 1),
+	(40, 2, 1),
+	(40, 4, 2),
+	(11, 1, 2),
+	(11, 2, 1),
+	(11, 3, 3),
+	(11, 4, 1),
+	(11, 5, 2),
+	(12, 6, 1),
+	(12, 7, 2),
+	(12, 8, 1),
+	(12, 9, 2),
+	(12, 10, 3),
+	(13, 11, 1),
+	(13, 12, 2),
+	(13, 13, 1),
+	(13, 14, 2),
+	(13, 15, 3),
+	(14, 16, 1), (14, 17, 2), (14, 18, 1), (14, 19, 2), (14, 20, 3),
+	(15, 21, 1), (15, 22, 2), (15, 23, 1), (15, 24, 2), (15, 25, 3),
+	(16, 26, 1), (16, 27, 2), (16, 28, 1), (16, 29, 2), (16, 30, 3),
+	(17, 31, 1), (17, 32, 2), (17, 33, 1), (17, 34, 2), (17, 35, 3),
+	(18, 36, 1), (18, 37, 2), (18, 38, 1), (18, 39, 2), (18, 40, 3),
+	(19, 41, 1), (19, 42, 2), (19, 43, 1), (19, 44, 2), (19, 45, 3),
+	(20, 46, 1), (20, 47, 2), (20, 48, 1), (20, 49, 2), (20, 50, 3),
+	(21, 1, 1), (21, 2, 2), (21, 3, 1), (21, 4, 2), (21, 5, 3),
+	(22, 6, 1), (22, 7, 2), (22, 8, 1), (22, 9, 2), (22, 10, 3),
+	(23, 11, 1), (23, 12, 2), (23, 13, 1), (23, 14, 2), (23, 15, 3),
+	(24, 16, 1), (24, 17, 2), (24, 18, 1), (24, 19, 2), (24, 20, 3),
+	(25, 21, 1), (25, 22, 2), (25, 23, 1), (25, 24, 2), (25, 25, 3),
+	(26, 26, 1), (26, 27, 2), (26, 28, 1), (26, 29, 2), (26, 30, 3),
+	(27, 31, 1), (27, 32, 2), (27, 33, 1), (27, 34, 2), (27, 35, 3),
+	(28, 36, 1), (28, 37, 2), (28, 38, 1), (28, 39, 2), (28, 40, 3),
+	(29, 41, 1), (29, 42, 2), (29, 43, 1), (29, 44, 2), (29, 45, 3),
+	(30, 46, 1), (30, 47, 2), (30, 48, 1), (30, 49, 2), (30, 50, 3),
+	(31, 1, 1), (31, 2, 2), (31, 3, 1), (31, 4, 2), (31, 5, 3),
+	(32, 6, 1), (32, 7, 2), (32, 8, 1), (32, 9, 2), (32, 10, 3),
+	(33, 11, 1), (33, 12, 2), (33, 13, 1), (33, 14, 2), (33, 15, 3),
+	(34, 16, 1), (34, 17, 2), (34, 18, 1), (34, 19, 2), (34, 20, 3),
+	(35, 21, 1), (35, 22, 2), (35, 23, 1), (35, 24, 2), (35, 25, 3),
+	(36, 26, 1), (36, 27, 2), (36, 28, 1), (36, 29, 2), (36, 30, 3),
+	(37, 31, 1), (37, 32, 2), (37, 33, 1), (37, 34, 2), (37, 35, 3),
+	(38, 36, 1), (38, 37, 2), (38, 38, 1), (38, 39, 2), (38, 40, 3),
+	(39, 41, 1), (39, 42, 2), (39, 43, 1), (39, 44, 2), (39, 45, 3),
+	(40, 46, 1), (40, 47, 2), (40, 48, 1), (40, 49, 2), (40, 50, 3),
+	(41, 1, 1), (41, 2, 2), (41, 3, 1), (41, 4, 2), (41, 5, 3),
+	(42, 6, 1), (42, 7, 2), (42, 8, 1), (42, 9, 2), (42, 10, 3),
+	(43, 11, 1), (43, 12, 2), (43, 13, 1), (43, 14, 2), (43, 15, 3),
+	(44, 16, 1), (44, 17, 2), (44, 18, 1), (44, 19, 2), (44, 20, 3),
+	(45, 21, 1), (45, 22, 2), (45, 23, 1), (45, 24, 2), (45, 25, 3),
+	(46, 26, 1), (46, 27, 2), (46, 28, 1), (46, 29, 2), (46, 30, 3),
+	(47, 31, 1), (47, 32, 2), (47, 33, 1), (47, 34, 2), (47, 35, 3),
+	(48, 36, 1), (48, 37, 2), (48, 38, 1), (48, 39, 2), (48, 40, 3),
+	(49, 41, 1), (49, 42, 2), (49, 43, 1), (49, 44, 2), (49, 45, 3),
+	(50, 46, 1), (50, 47, 2), (50, 48, 1), (50, 49, 2), (50, 50, 3);
+	INSERT INTO comanda (fk_id_pedido, fk_id_menu, quantidade) VALUES (51, 1, 2);
+	INSERT INTO comanda (fk_id_pedido, fk_id_menu, quantidade) VALUES (51, 3, 1);
+	INSERT INTO comanda (fk_id_pedido, fk_id_menu, quantidade) VALUES (52, 2, 3);
+	INSERT INTO comanda (fk_id_pedido, fk_id_menu, quantidade) VALUES (52, 4, 2);
+	INSERT INTO comanda (fk_id_pedido, fk_id_menu, quantidade) VALUES (53, 5, 1);
+	INSERT INTO comanda (fk_id_pedido, fk_id_menu, quantidade) VALUES (53, 7, 2);
+	INSERT INTO comanda (fk_id_pedido, fk_id_menu, quantidade) VALUES (54, 6, 4);
+	INSERT INTO comanda (fk_id_pedido, fk_id_menu, quantidade) VALUES (54, 8, 1);
+	INSERT INTO comanda (fk_id_pedido, fk_id_menu, quantidade) VALUES (55, 9, 2);
+	INSERT INTO comanda (fk_id_pedido, fk_id_menu, quantidade) VALUES (55, 10, 3);
+	INSERT INTO comanda (fk_id_pedido, fk_id_menu, quantidade) VALUES (57, 11, 1);
+	INSERT INTO comanda (fk_id_pedido, fk_id_menu, quantidade) VALUES (57, 12, 2);
+	INSERT INTO comanda (fk_id_pedido, fk_id_menu, quantidade) VALUES (58, 13, 2);
+	INSERT INTO comanda (fk_id_pedido, fk_id_menu, quantidade) VALUES (58, 14, 1);
+	INSERT INTO comanda (fk_id_pedido, fk_id_menu, quantidade) VALUES (59, 15, 2);
+	INSERT INTO comanda (fk_id_pedido, fk_id_menu, quantidade) VALUES (59, 16, 1);
+	INSERT INTO comanda (fk_id_pedido, fk_id_menu, quantidade) VALUES (60, 17, 2);
+	INSERT INTO comanda (fk_id_pedido, fk_id_menu, quantidade) VALUES (60, 18, 3);
 
 ### 9	TABELAS E PRINCIPAIS CONSULTAS<br>
-    OBS: Usa template da disciplina disponibilizado no Colab.<br>
     
-A partir daqui, vamos para o colab: https://colab.research.google.com/drive/1i5rY6VJrsFX8wEVJNH-iQRVEae2EdjJl#scrollTo=-Xk52UNhyDEv<br>
+O tópico 9 foi inteiramente desenvolvido no colab podendo ser acessado através desse link: 
+https://colab.research.google.com/drive/1i5rY6VJrsFX8wEVJNH-iQRVEae2EdjJl#scrollTo=-Xk52UNhyDEv<br>
  
-#### 9.1	CONSULTAS DAS TABELAS COM TODOS OS DADOS INSERIDOS (Todas) <br>
 
-#### 9.2	CONSULTAS DAS TABELAS COM FILTROS WHERE (Mínimo 4)<br>
-
-#### 9.3	CONSULTAS QUE USAM OPERADORES LÓGICOS, ARITMÉTICOS E TABELAS OU CAMPOS RENOMEADOS (Mínimo 11)
-    a) Criar 5 consultas que envolvam os operadores lógicos AND, OR e Not
-    b) Criar no mínimo 3 consultas com operadores aritméticos 
-    c) Criar no mínimo 3 consultas com operação de renomear nomes de campos ou tabelas
-
-#### 9.4	CONSULTAS QUE USAM OPERADORES LIKE E DATAS (Mínimo 12) <br>
-    a) Criar outras 5 consultas que envolvam like ou ilike
-    b) Criar uma consulta para cada tipo de função data apresentada.
-
-># Marco de Entrega 02: Do item 6. até o item 9.1 (5 PTS) <br>
-
-#### 9.5	INSTRUÇÕES APLICANDO ATUALIZAÇÃO E EXCLUSÃO DE DADOS (Mínimo 6)<br>
-    a) Criar minimo 3 de exclusão
-    b) Criar minimo 3 de atualização
-
-#### 9.6	CONSULTAS COM INNER JOIN E ORDER BY (Mínimo 6)<br>
-    a) Uma junção que envolva todas as tabelas possuindo no mínimo 2 registros no resultado
-    b) Outras junções que o grupo considere como sendo as de principal importância para o trabalho
-
-#### 9.7	CONSULTAS COM GROUP BY E FUNÇÕES DE AGRUPAMENTO (Mínimo 6)<br>
-    a) Criar minimo 2 envolvendo algum tipo de junção
-
-#### 9.8	CONSULTAS COM LEFT, RIGHT E FULL JOIN (Mínimo 4)<br>
-    a) Criar minimo 1 de cada tipo
-
-#### 9.9	CONSULTAS COM SELF JOIN E VIEW (Mínimo 6)<br>
-        a) Uma junção que envolva Self Join (caso não ocorra na base justificar e substituir por uma view)
-        b) Outras junções com views que o grupo considere como sendo de relevante importância para o trabalho
-
-#### 9.10	SUBCONSULTAS (Mínimo 4)<br>
-     a) Criar minimo 1 envolvendo GROUP BY
-     b) Criar minimo 1 envolvendo algum tipo de junção
-
-># Marco de Entrega 03: Do item 9.2 até o ítem 9.10 (10 PTS)<br>
 
 ### 10 RELATÓRIOS E GRÁFICOS
 
