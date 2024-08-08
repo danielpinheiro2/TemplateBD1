@@ -52,8 +52,8 @@ O sistema deve ter: Clientes, Pedidos, Menu, Inventário os clientes podem ser a
 	PRECO: Campo que armazena o preço do item no cardápio.
 
 	
-	ITEM: Tabela que armazena informações relativas aos itens.
-	ID_ITEM: Campo que armazena a chave primária de um item na tabela de itens.
+	COMANDA: Tabela que armazena informações relativas a comanda.
+	ID_COMANDA: Campo que armazena a chave primária de um item na tabela de comanda.
 	QUANTIDADE: Campo que armazena a quantidade do item em um pedido específico.
 	
 	PEDIDO: Tabela que armazena informações relativas aos pedidos feitos no restaurante.
