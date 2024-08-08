@@ -37,7 +37,8 @@ O sistema deve ter: Clientes, Pedidos, Menu, Inventário os clientes podem ser a
 ### 5.MODELO CONCEITUAL<br>
 
         
-![image](https://github.com/user-attachments/assets/dd0e944e-051b-4fbc-acea-5e73b27cacaf)
+![Conceitual](https://github.com/user-attachments/assets/585687ae-a783-460f-833e-fc6fdf361ad4)
+
 
 #### 5.1 Validação do Modelo Conceitual
     [Grupo01]: [Nomes dos que participaram na avaliação]
@@ -78,10 +79,8 @@ O sistema deve ter: Clientes, Pedidos, Menu, Inventário os clientes podem ser a
 ># Marco de Entrega 01: Do item 1 até o item 5.2 (5 PTS) <br> 
 
 ### 6	MODELO LÓGICO<br>
-        a) inclusão do esquema lógico do banco de dados
-        b) verificação de correspondencia com o modelo conceitual 
-        (não serão aceitos modelos que não estejam em conformidade)
-![image](https://github.com/user-attachments/assets/75bc07f2-66d6-4c0f-91ca-400af497a658)
+
+![logico](https://github.com/user-attachments/assets/2936e60a-68d5-4ae7-a1d6-d3bfa6e219ae)
 
 
 ### 7	MODELO FÍSICO<br>
