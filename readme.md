@@ -569,14 +569,17 @@ https://colab.research.google.com/drive/1i5rY6VJrsFX8wEVJNH-iQRVEae2EdjJl#scroll
 
 #### a) análises e resultados provenientes do banco de dados desenvolvido (usar modelo disponível)
 #### b) link com exemplo de relatórios será disponiblizado pelo professor no AVA
-#### OBS: Esta é uma atividade de grande relevância no contexto do trabalho. Mantenha o foco nos 5 principais relatórios/resultados visando obter o melhor resultado possível.
 
+Este topico foi desenvolvido no ambiente colab podendo ser acessado no seguinte link:
+https://colab.research.google.com/drive/16H_qNqyHW4Q9MfMvDb89ApGcVGK67qrV
     
 
 ### 11	AJUSTES DA DOCUMENTAÇÃO, CRIAÇÃO DOS SLIDES E VÍDEO PARA APRESENTAÇAO FINAL <br>
 
 #### a) Modelo (pecha kucha)<br>
 #### b) Tempo de apresentação 6:40 
+
+Link da apresentação: https://www.youtube.com/watch?v=seWZP5oKvHo
 
 ># Marco de Entrega 04: Itens 10 e 11 (20 PTS) <br>
 <br>
@@ -585,40 +588,7 @@ https://colab.research.google.com/drive/1i5rY6VJrsFX8wEVJNH-iQRVEae2EdjJl#scroll
 
 
 
-### 12 FORMATACAO NO GIT:<br> 
-https://help.github.com/articles/basic-writing-and-formatting-syntax/
-<comentario no git>
-    
-##### About Formatting
-    https://help.github.com/articles/about-writing-and-formatting-on-github/
-    
-##### Basic Formatting in Git
-    
-    https://help.github.com/articles/basic-writing-and-formatting-syntax/#referencing-issues-and-pull-requests
-    
-    
-##### Working with advanced formatting
-    https://help.github.com/articles/working-with-advanced-formatting/
-#### Mastering Markdown
-    https://guides.github.com/features/mastering-markdown/
-
-    
-### OBSERVAÇÕES IMPORTANTES
-
-#### Todos os arquivos que fazem parte do projeto (Imagens, pdfs, arquivos fonte, etc..), devem estar presentes no GIT. Os arquivos do projeto vigente não devem ser armazenados em quaisquer outras plataformas.
-1. <strong>Caso existam arquivos com conteúdos sigilosos<strong>, comunicar o professor que definirá em conjunto com o grupo a melhor forma de armazenamento do arquivo.
-
-#### Todos os grupos deverão fazer Fork deste repositório e dar permissões administrativas ao usuário do git "profmoisesomena", para acompanhamento do trabalho.
-
-#### Os usuários criados no GIT devem possuir o nome de identificação do aluno (não serão aceitos nomes como Eu123, meuprojeto, pro456, etc). Em caso de dúvida comunicar o professor.
 
 
-Link para BrModelo:<br>
-http://www.sis4.com/brModelo/download.html
-<br>
-
-
-Link para curso de GIT<br>
-![https://www.youtube.com/curso_git](https://www.youtube.com/playlist?list=PLo7sFyCeiGUdIyEmHdfbuD2eR4XPDqnN2?raw=true "Title")
 
 
