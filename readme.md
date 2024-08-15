@@ -17,7 +17,7 @@ Este trabalho foi desenvolvido na disciplina de banco de dados do semestre 2024/
 ### 2.MINI-MUNDO<br>
 
 > O sofisticado restaurante "Le Gourmet", conhecido por sua sofisticação e excelência, enfrenta desafios na gestão devido sua clientela exigente. Para manter o alto padrão e eficiência, Sr.Manoel decidiu implementar um sistema integrado que garantisse a precisão no gerenciamento do seu negócio.
-O sistema deve ter: Clientes, Pedidos, Menu, Inventário os clientes podem ser atendidos no restaurante ou fazer o pedido para entrega, cada cliente deve ter o nome, telefone para contato e local onde mora caso peça para entrega, os pedidos devem ser compostos por um ou mais itens do menu, podem ser para consumo local, viagem ou para entrega, cada pedido deve ter um status entre "em preparo, pronto, entregue ou cancelado", também deve registrar a data e hora do pedido. o Menu é deve ser composto por diversos itens, cada item possui nome, descrição, preço e categoria, o menu pode ser atualizado conforme necessário pelo gerente do estabelecimento. o inventário deve controlar os insumos e ingredientes necessários para a preparação dos itens do menu, cada item deve possuir um nome, quantidade disponível e data de validade, o inventário deve ser atualizado conforme os insumos são utilizados e repostos.
+O sistema deve ter: Clientes, Pedidos, Menu. Os clientes podem ser atendidos no restaurante ou fazer o pedido para entrega, cada cliente deve ter o nome, telefone para contato e local onde mora caso peça para entrega, os pedidos devem ser compostos por um ou mais itens do menu, podem ser para consumo local, viagem ou para entrega, cada pedido deve ter um status entre "em preparo, pronto, entregue ou cancelado", também deve registrar a data e hora do pedido. o Menu é deve ser composto por diversos itens, cada item possui nome, descrição, preço e categoria, o menu pode ser atualizado conforme necessário pelo gerente do estabelecimento.
 
 ### 3.PERGUNTAS A SEREM RESPONDIDAS<br>
 #### 3.1 QUAIS PERGUNTAS PODEM SER RESPONDIDAS COM O SISTEMA PROPOSTO?
@@ -43,7 +43,8 @@ Relatório 5: Exibir a distribuição de vendas por hora do dia, para identifica
 ### 5.MODELO CONCEITUAL<br>
 
         
-![Conceitual](https://github.com/user-attachments/assets/585687ae-a783-460f-833e-fc6fdf361ad4)
+![CONCEITUAL_ATUALIZADO_T2](https://github.com/user-attachments/assets/be37f0a6-7cd2-49ed-bb43-651fc06ab7b0)
+
 
 
 #### 5.1 Validação do Modelo Conceitual
@@ -74,11 +75,6 @@ Relatório 5: Exibir a distribuição de vendas por hora do dia, para identifica
 	TELEFONE: Campo que armazena o número de contato do cliente.
 	ENDERECO: Campo que armazena o endereço do cliente para entrega de pedidos.
 	
-	INVENTARIO: Tabela que armazena as informações relativas ao inventário do restaurante.
-	ID_INVENTARIO: Campo que armazena a chave primária de um item do inventário.
-	NOME: Campo que armazena o nome do item no inventário.
-	QTD_DISPONIVEL: Campo que armazena a quantidade disponível de um item no inventário.
-	DATA_VALIDADE: Campo que armazena a data de validade do item no inventário.
 
     
 
@@ -86,14 +82,14 @@ Relatório 5: Exibir a distribuição de vendas por hora do dia, para identifica
 
 ### 6	MODELO LÓGICO<br>
 
-![logico](https://github.com/user-attachments/assets/2936e60a-68d5-4ae7-a1d6-d3bfa6e219ae)
+![LOGICO_ATUALIZADO_T2](https://github.com/user-attachments/assets/4b7f4805-ec9c-42ba-8aca-75b50f21036c)
+
 
 
 ### 7	MODELO FÍSICO<br>
         DROP TABLE IF EXISTS Comanda;
 	DROP TABLE IF EXISTS Pedido;
 	DROP TABLE IF EXISTS Cliente;
-	DROP TABLE IF EXISTS Inventario;
 	DROP TABLE IF EXISTS Menu;
 	
 	CREATE TABLE Cliente (
@@ -103,12 +99,6 @@ Relatório 5: Exibir a distribuição de vendas por hora do dia, para identifica
 	    endereco VARCHAR(255)
 	);
 	
-	CREATE TABLE Inventario (
-	    id_inventario SERIAL PRIMARY KEY,
-	    nome VARCHAR(100) NOT NULL,
-	    quantidade_disponivel INTEGER NOT NULL,
-	    data_validade DATE NOT NULL
-	);
 	
 	CREATE TABLE Menu (
 	    id_menu SERIAL PRIMARY KEY,
@@ -190,79 +180,7 @@ Relatório 5: Exibir a distribuição de vendas por hora do dia, para identifica
 	INSERT INTO cliente (nome, telefone, endereco) VALUES ('Caroline Oliveira', '8901234576', 'Rua dos Ipês, 4747');
 	
 	
-	
-	
-	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Farinha', 100, '2024-12-31');
-	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Açúcar', 200, '2024-11-30');
-	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Ovo', 500, '2024-10-15');
-	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Leite', 150, '2024-09-20');
-	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Manteiga', 80, '2024-08-10');
-	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Queijo', 120, '2024-12-01');
-	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Presunto', 90, '2024-11-15');
-	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Tomate', 200, '2024-10-30');
-	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Cebola', 180, '2024-09-15');
-	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Alho', 75, '2024-08-25');
-	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Cenoura', 160, '2024-11-10');
-	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Batata', 200, '2024-12-20');
-	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Abobrinha', 140, '2024-10-05');
-	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Pimentão', 130, '2024-11-01');
-	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Brócolis', 110, '2024-09-30');
-	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Espinafre', 90, '2024-12-10');
-	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Alface', 180, '2024-08-15');
-	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Rúcula', 100, '2024-11-20');
-	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Couve', 120, '2024-09-05');
-	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Feijão', 300, '2025-01-15');
-	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Arroz', 250, '2025-02-01');
-	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Macarrão', 200, '2024-12-25');
-	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Salsa', 90, '2024-08-30');
-	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Manjericão', 80, '2024-09-10');
-	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Orégano', 70, '2024-10-05');
-	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Páprica', 60, '2024-11-20');
-	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Cominho', 55, '2024-12-01');
-	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Alecrim', 65, '2024-09-25');
-	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Louro', 75, '2024-10-15');
-	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Canela', 85, '2024-12-05');
-	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Cravo', 95, '2024-11-10');
-	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Gengibre', 110, '2024-09-20');
-	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Azeite', 120, '2025-01-10');
-	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Vinagre', 130, '2025-02-20');
-	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Molho de Soja', 100, '2025-03-15');
-	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Ketchup', 140, '2025-04-10');
-	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Maionese', 150, '2025-05-05');
-	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Mostarda', 160, '2025-06-01');
-	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Mel', 90, '2025-07-10');
-	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Açúcar Mascavo', 70, '2025-08-15');
-	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Sal', 80, '2025-09-20');
-	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Pimenta', 85, '2025-10-25');
-	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Chá', 95, '2025-11-30');
-	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Peito de Frango', 50, '2025-08-03');
-	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Carne Moída', 50, '2025-08-03');
-	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Leite Condensado', 100, '2025-01-01');
-	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Creme de Leite', 120, '2024-12-31');
-	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Chocolate em Pó', 200, '2025-02-15');
-	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Fermento em Pó', 150, '2025-03-20');
-	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Coco Ralado', 180, '2025-04-10');
-	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Amido de Milho', 220, '2025-05-05');
-	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Molho de Tomate', 250, '2025-06-25');
-	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Ervilha', 180, '2024-11-15');
-	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Milho', 200, '2024-10-30');
-	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Azeitona', 160, '2025-01-20');
-	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Palmito', 140, '2025-02-05');
-	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Sardinha', 110, '2025-03-10');
-	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Atum', 100, '2025-04-15');
-	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Camarão', 90, '2025-05-20');
-	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Lula', 80, '2025-06-25');
-	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Bacalhau', 70, '2025-07-30');
-	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Pão de Forma', 150, '2024-08-20');
-	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Pão Francês', 180, '2024-08-25');
-	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Requeijão', 140, '2024-12-05');
-	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Iogurte', 130, '2024-09-10');
-	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Café', 200, '2025-02-01');
-	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Suco de Laranja', 160, '2025-03-05');
-	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Suco de Uva', 140, '2025-04-20');
-	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Refrigerante', 300, '2025-06-15');
-	INSERT INTO Inventario (nome, quantidade_disponivel, data_validade) VALUES ('Água Mineral', 500, '2025-07-01');
-	
+
 	
 	
 	INSERT INTO Menu (nome, descricao, preco) VALUES ('Pizza Margherita', 'Pizza com molho de tomate e queijo mozzarella', 29.90);
